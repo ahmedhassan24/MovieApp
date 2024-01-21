@@ -1,0 +1,120 @@
+<div >
+    <div>
+        <h1 class="name text-center my-2">{{ movie?.title }}</h1>
+        <div>
+            <!-- <svg xmlns="http://www.w3.org/2000/svg" width="55" height="55" viewBox="0 0 55 55">
+            </svg> -->
+            <img class = "poster mx-5 my-3" src="https://image.tmdb.org/t/p/original/{{ movie?.backdrop_path }}">
+        </div>
+    </div>
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <mat-tab-group class="mt-5 mb-5" mat-align-tabs="center" animationDuration="0ms">
+                <mat-tab label="{{'Overview' | translate}}">
+                    <div class="listing-space info__movies">
+                        
+                        <div class="right">
+                            <div class="overview">
+                                <h2 class="title my-2">{{'Storyline' | translate}}</h2>
+                                <p class="justify-content-center summary my-3">{{movie?.overview }}</p>
+                            </div>
+                            <div class="stats row">
+                                <div class="col-4">
+                                    <div class="row">
+                                        <div class="col-2">
+                                            <div class="label">{{'Released' | translate}}:</div>
+                                            <div class="label" *ngIf="movie?.revenue">{{'Revenue' | translate}}: </div>
+                                            <div class="label">{{'Language' | translate}}:</div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="value">{{ movie?.release_date }}</div>
+                                            <div class="value" *ngIf="movie?.revenue">${{ movie?.revenue }} </div>
+                                            <div class="value" *ngFor="let language of movie?.spoken_languages">
+                                                {{ language?.name }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                    <div class="col-4">
+                                        <div class="row">
+                                            <div class="col-2">
+                                                <div class="label">{{'Runtime' | translate}}:</div>
+                                                <div class="label">{{'Status' | translate}}:</div>
+                                                <div class="label" *ngIf="movie?.budget">{{'Budget' | translate}}:</div>
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="value">{{ movie?.runtime }} Minutes</div>
+                                                <div class="value">{{ movie?.status }}</div>
+                                                <div class="value" *ngIf="movie?.budget">{{ movie?.budget }}</div>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                    <div class="listing-space">
+                        <div class="listing__head">
+                            <h2 class="title my-2 text-center">{{'Cast' | translate}}</h2>
+                        </div>
+                        <p-carousel [value]="casts" [numVisible]="6" [numScroll]="4" [circular]="false">
+                            <ng-template let-cast pTemplate="item">
+                                <div class="listing-item-style">
+                                    <div class="overlay">
+                                    </div>
+                                    <img *ngIf="cast.profile_path"
+                                        src="https://image.tmdb.org/t/p/w370_and_h556_bestv2/{{cast?.profile_path}}">
+                                    <img *ngIf="!cast?.profile_path" src="assets/images/DefaultPerson.png">
+                                    <strong>{{ cast?.name }}</strong>
+                                </div>
+                            </ng-template>
+                        </p-carousel>
+                    </div>
+
+                </mat-tab>
+                <mat-tab label="{{'Photos' | translate}}">
+                    <div class="listing-space backdrop_">
+                        <div class="head">
+                            <h2 class="title">Backdrops</h2>
+                        </div>
+                        <div class="items row">
+                            <mat-card class="col-md-3" *ngFor="let backdrop of backdrops | slice: 0:12">
+                                <div class=" my-2">
+                                    <img class="image"
+                                        src="https://image.tmdb.org/t/p/w533_and_h300_bestv2/{{ backdrop?.file_path }}">
+                                </div>
+                            </mat-card>
+                        </div>
+                    </div>
+                </mat-tab>
+            </mat-tab-group>
+
+
+            <div class="listing-space mt-20 mb-5">
+                <div class="listing__head">
+                    <h2 class="listing__title">Recommended Movies</h2>
+                </div>
+                <p-carousel [value]="recomendMovies" [numVisible]="6" [numScroll]="4" [circular]="false">
+                    <ng-template let-recomend pTemplate="item">
+                        <div class="listing-item-style" [routerLink]="['/movies/', recomend.id]">
+                            <div class="overlay">
+                                <div class="hover">
+                                    <i class="material-icons">play_arrow</i> PLAY NOW</div>
+                            </div>
+                            <img *ngIf="recomend?.poster_path"
+                                src="https://image.tmdb.org/t/p/w370_and_h556_bestv2/{{recomend?.poster_path}}">
+                            <h6>{{ recomend?.title }}</h6>
+                            <p class="rate"><i class="material-icons">star</i><span>{{recomend?.vote_average}}</span>
+                                /10</p>
+                            <div class="year"><span>{{recomend?.release_date | date: 'yyyy'}}</span></div>
+                        </div>
+                    </ng-template>
+                </p-carousel>
+            </div>
+        </div>
+    </div>
+</div>

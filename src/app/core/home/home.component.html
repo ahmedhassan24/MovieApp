@@ -1,0 +1,37 @@
+<!-- <ng-container>
+    <app-slider></app-slider>
+</ng-container> -->
+
+<div class="listing">
+    <div class="listing__head">
+        <h1 class="text-center my-3">Trending Movies</h1>
+        <h3 [routerLink]="['/movies']" routerLinkActive="router-link-active" class="my-2 mx-3">
+            <strong>Explore All</strong>
+        </h3>
+    </div>
+
+    <app-skeleton *ngIf="loader"></app-skeleton>
+    <p-carousel [value]="nowPlaying" [numVisible]="4" [numScroll]="4" [circular]="false" *ngIf="!loader">
+        <ng-template let-movie pTemplate="item">
+            <div class=" listing-item-style" [routerLink]="['/movies/', movie.id]"> 
+                <div class="overlay">
+                    <div class="hover">
+                        <i class="material-icons">play_arrow</i>
+                         PLAY NOW</div>
+                </div>
+                <img *ngIf="movie?.poster_path"
+                    src="https://image.tmdb.org/t/p/w370_and_h556_bestv2/{{movie?.poster_path}}">
+                <strong>{{ movie?.title }}</strong>
+                <div class="row">
+                    <p class="col-4"><span>{{movie?.release_date | date: 'yyyy'}}</span></p>
+                    <div class="col-4">
+                        <p class="row"><i class="material-icons col-2">star</i><span class="col-4" >{{movie?.vote_average}}/10</span>
+                        </p>
+                        </div>
+                    
+                </div>
+                
+            </div>
+        </ng-template>
+    </p-carousel>
+</div>
