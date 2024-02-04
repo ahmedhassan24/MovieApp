@@ -1,0 +1,16 @@
+<nav class="navbar  " style="background-color: rgb(92, 92, 240); ">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a routerLink="/home" class="navbar-brand" style="color: white;"> {{'Home' | translate}} </a>
+        </div>
+        <div class="collapse navbar-collapse">    </div>    
+            <ul class="nav navbar-nav" style="list-style-type: none;">
+                <li  routerLinkActive="active"  >
+                    <a  style="cursor: pointer; color:white" (click) = "switchLanguageArabic()">{{'AR' | translate}} </a>|
+                    <a  style="cursor: pointer; color:white" (click) = "switchLanguageEnglish()">{{'EN' | translate}}</a>
+                    <a class="mx-2" *ngIf="!isAuthenticated" routerLink="/auth" style="cursor: pointer; color:white">{{'Login/Signup' | translate}}</a>
+                    <a class ="mx-2" *ngIf="isAuthenticated"  style="cursor: pointer; color:white" (click) = "onLogout()">{{'Logout' | translate}}</a>
+                </li>
+            </ul>
+    </div>
+</nav>

@@ -1,0 +1,34 @@
+<div class="listing">
+
+    <app-skeleton *ngIf="loader"></app-skeleton>
+    <div class="row" *ngIf="!loader">
+        <div class="col-md-3 " *ngFor="let movie of topRated | slice:0:18">
+            <mat-card class="listing-item-style" [routerLink]="['/movies/', movie.id]">
+                <div class="overlay">
+                    <div class="hover"><i class="material-icons">play_arrow</i> PLAY NOW</div>
+                </div> 
+                <mat-card-content>
+                    <img mat-card-image src="https://image.tmdb.org/t/p/w370_and_h556_bestv2/{{movie?.posterPath}}"
+                    [alt]="movie.title ? movie.title : movie.name"> 
+                    <!-- <p class="rate"><i class="material-icons">star</i><span>{{movie?.vote_average}}</span> /10</p> -->
+                </mat-card-content>
+   
+                    <!-- <p class="year"><span>{{movie?.release_date | date: 'yyyy'}}</span></p> -->
+                    <strong>{{ movie?.title }}</strong>
+                    <div class="row movie-title">
+                        <p class="col-4"><span>{{movie?.releaseDate | date: 'yyyy'}}</span></p>
+                        <div class="col-4">
+                            <p class="row"><i class="material-icons col-2">star</i><span class="col-4" >{{movie?.voteAverage}}/10</span>
+                            </p>
+                            </div>
+                        
+                    </div>
+                
+
+            </mat-card>
+        </div>
+    </div>
+</div>
+
+
+<mat-paginator  [pageSize]="10" #paginator (page)="changePage($event)"></mat-paginator>
